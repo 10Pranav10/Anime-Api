@@ -5,6 +5,7 @@ from bs4 import BeautifulSoup
 from fastapi import FastAPI, Query, APIRouter
 import uvicorn
 from typing import Optional
+from fastapi.middleware.cors import CORSMiddleware
 
 # ==========================================
 # 1. API INITIALIZATION & CONFIG
@@ -14,6 +15,14 @@ app = FastAPI(
     title="AnimeSalt Fast API",
     description="A high-performance, async scraping API with concurrent fetching and caching.",
     version="4.0.0"
+)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Allows all origins
+    allow_credentials=True,
+    allow_methods=["*"],  # Allows all methods (GET, POST, etc.)
+    allow_headers=["*"],  # Allows all headers
 )
 
 BASE_URL = "https://animesalt.ac/"
